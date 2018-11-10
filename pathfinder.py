@@ -11,7 +11,7 @@ elevation_list = [[int(elevation) for elevation in row] for row in all_elevation
 print (elevation_list[0][0:2])
 print (elevation_list[3][1:4])
 
-
+print(len(elevation_list[0]))
 
 
 def get_maximum_elevation(list):
@@ -24,9 +24,8 @@ def get_maximum_elevation(list):
     highest_point = max(highest_ints_in_list)
     print(highest_point)
     return highest_point
-highest_elevation = get_maximum_elevation(elevation_list)
+highest_point = get_maximum_elevation(elevation_list)
     
-
 def get_minimum_elevation(list):
     lowest_ints_in_list = [min(row) for row in list]
     lowest_point = min(lowest_ints_in_list)
@@ -36,30 +35,32 @@ lowest_point = get_minimum_elevation(elevation_list)
 
 
 # highest_elevation_pixel_color = ("RGB", 255, 255, 255)
-# #white
+# 255 = white
 # lowest_elevation_pixel_color = ("RGB", 0, 0, 0)
-# #black
+# 0 = black
 
-this_image = Image.new("RGB", (3000, 600), (125, 125, 125))
+this_image = Image.new("RGB", (600, 600), (125, 125, 125))
+# this creates a new image ("this_image.png") that is 600px x 600px and is color 125 all over
 this_image.save("this_image.png")
+# we save the image file
 this_image.show("this_image.png")
+# we show the image file (aka open it up when run)
 
-def draw_point(coords, color)
-    image.putpixel(coords, color)
+# def draw_point(coords, color):
+#     image.putpixel(coords, color)
+# pass
 
-draw_point(([50][300]), (125, 125, 125)
 
- 
-# def determine_pixel_color(list):
-#     """
-#     Takes elevation, divides by highest elevation, multiplies that by 255 and rounds to the nearest whole number-- this gives us a number between 0 and 255 to determine color intensity at pixel point in map.
-#     """
-#     color_formula = round(elevation_list[1][3] / highest_elevation * 255)
-#     color_intensity = [color_formula(item) for item in elevation_list]
-#     print(color_intensity)   
 
-# determine_pixel_color(list=elevation_list[0][1:3])
-    
+
+def elevation_to_color_formula(number):
+    """
+    This function takes a number, runs it through the formula and returns it as an absolute value rounded number somwhere between 0-255.
+    """
+    color_intensity = abs(round(((number - lowest_point) / (highest_point - lowest_point)) * 255))
+    return color_intensity
+
+print(elevation_to_color_formula(3139))
 
         
 
