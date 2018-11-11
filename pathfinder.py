@@ -1,6 +1,8 @@
-import csv
+# import csv
 import random
-from PIL import Image
+# import pdb
+# from PIL import Image
+
 
 with open("elevation_small.txt", 'r') as f:
     all_elevations = [line.strip('\n').split() for line in f]
@@ -71,24 +73,33 @@ def print_something(list):
 
 # print_something(intensity_list)
 
+def starting_point():
+    y = random.randint(0, 600)
+    x = 0
+    return (x, y)
+# print(starting_point())
 
-# starting_point = random.randint(0, 600)
-# current_step = (x, y)
-# y = elevation_list[]
-# x = y[0]
-
-def next_step_options(x, y=0):
+def next_step_options(row, elevation):
     """
     Taking the current location and returning the location & value for possible options (fwd, up; fwd; fwd, dwn) for the next step.
     """
-    y = [row for row in elevation_list]
-    x = [elevation for elevation in y]
-    # coordinates = (x, y)
-    
+    # y = [row for row in elevation_list]
+    # x = [elevation for elevation in y]
+    (x, y) = starting_point()
+    print(x, y)
     step_options = {}
+    
     if y == 0:
-        step_options['straight'] = "this is a test."
-    #     step_options['down'] = coordinates([x+1][y+1])
+        step_options['straight'] = (x+1, y)
+        step_options['down'] = (x+1, y+1)
+    if y == 599:
+        step_options['straight'] = (x+1, y)
+        step_options['up'] = (x+1, y-1)
+    else:
+        step_options['straight'] = (x+1, y)
+        step_options['up'] = (x+1, y-1)
+        step_options['down'] = (x+1, y+1)
+        # step_options['down'] = coordinates([x+1][y+1])
     # elif y == (len(elevation_list) - 1):
     #     step_options['up'] = coordinates([x+1][y-1])
     #     step_options['straight'] = coordinates([x+1][y])
@@ -98,7 +109,7 @@ def next_step_options(x, y=0):
     #     step_options['down'] = coordinates([x+1][y+1])  
     print(step_options)
 
-next_step_options(2, 0)
+next_step_options(2, 1)
  
 # def step_up(coordinates):
 #     for y in elevation_list:
