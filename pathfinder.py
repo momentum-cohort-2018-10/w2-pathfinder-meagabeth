@@ -1,8 +1,7 @@
 import csv
+import random
 from PIL import Image
- 
-    # def list_of_int_lists(self, list):
-# with .txt open as f, file is list of subarrays where each subarray is a line in the file
+
 with open("elevation_small.txt", 'r') as f:
     all_elevations = [line.strip('\n').split() for line in f]
     print(all_elevations[0][1])
@@ -10,9 +9,7 @@ with open("elevation_small.txt", 'r') as f:
 elevation_list = [[int(elevation) for elevation in row] for row in all_elevations]
 print (elevation_list[0][0:2])
 print (elevation_list[3][1:4])
-
 print(len(elevation_list[0]))
-
 
 def get_maximum_elevation(list):
     # highest_ints_in_list = []
@@ -33,11 +30,6 @@ def get_minimum_elevation(list):
     return lowest_point
 lowest_point = get_minimum_elevation(elevation_list)
 
-
-# highest_elevation_pixel_color = ("RGB", 255, 255, 255)
-# 255 = white
-# lowest_elevation_pixel_color = ("RGB", 0, 0, 0)
-# 0 = black
 """
 this_image = Image.new("RGB", (600, 600), (125, 125, 125))
 # this creates a new image ("this_image.png") that is 600px x 600px and is color 125 all over
@@ -46,12 +38,6 @@ this_image.save("this_image.png")
 this_image.show("this_image.png")
 # we show the image file (aka open it up when run)
 """
-# def draw_point(coords, color):
-#     image.putpixel(coords, color)
-# pass
-
-
-
 
 def elevation_to_color_formula(number):
     """
@@ -59,19 +45,10 @@ def elevation_to_color_formula(number):
     """
     color_intensity = abs(round(((number - lowest_point) / (highest_point - lowest_point)) * 255))
     return color_intensity
-
-print(elevation_to_color_formula(4833))
-
 # create a new list of color intensities by looping over the list of elevations and applying the formula
-
 intensity_list = [[elevation_to_color_formula(number) for number in row] for row in elevation_list]
-print (intensity_list[0])
 print(len(intensity_list))
 
-# row = intensity_list[0]
-# for index in range(len(row)):
-#     for index in range(len(intensity_list)):
-#         print(index, row[index])
 
 def print_something(list):
     map_image = Image.new("RGB", (600, 600))
@@ -80,43 +57,69 @@ def print_something(list):
             map_image.putpixel((x, y), (value, value, value))
     map_image.save("map.png")
     map_image.show("map.png")
-print_something(intensity_list)
+
+#the next line puts a single blue pixel at index (300,300), saves image and then shows image
+    map_image.putpixel((300, 300), (0, 0, 200))
+    map_image.save("map_dot.png")
+    map_image.show("map_dot.png")
+
+# the next lines put a straight blue line vertically down the middle of the image
+    for x, row in (enumerate(list)):
+        map_image.putpixel((x, 300), (0, 0, 200))
+    map_image.save("map_vertical_line.png")
+    map_image.show("map_vertical_line.png")
+
+# print_something(intensity_list)
 
 
+# starting_point = random.randint(0, 600)
+# current_step = (x, y)
+# y = elevation_list[]
+# x = y[0]
 
+def next_step_options(x, y=0):
+    """
+    Taking the current location and returning the location & value for possible options (fwd, up; fwd; fwd, dwn) for the next step.
+    """
+    y = [row for row in elevation_list]
+    x = [elevation for elevation in y]
+    # coordinates = (x, y)
+    
+    step_options = {}
+    if y == 0:
+        step_options['straight'] = "this is a test."
+    #     step_options['down'] = coordinates([x+1][y+1])
+    # elif y == (len(elevation_list) - 1):
+    #     step_options['up'] = coordinates([x+1][y-1])
+    #     step_options['straight'] = coordinates([x+1][y])
+    # else:
+    #     step_options['up'] = (coordinates([x+1][y-1]))
+    #     step_options['straight'] = coordinates([x+1][y])   
+    #     step_options['down'] = coordinates([x+1][y+1])  
+    print(step_options)
 
+next_step_options(2, 0)
+ 
+# def step_up(coordinates):
+#     for y in elevation_list:
+#         for x in y:
+#             current_step = elevation_list[0][0]
+#             step_up = (current_step[x+1][y-1])
+#             return step_up
 
-# what_now = Image.new("RGB", (600, 600))
-# def enumerate_the_thing(image):
-#     for y, row in enumerate(intensity_list):
-#         for x, number in enumerate(row):
-#             image.putpixel((x, y), ())
-#     image.save("who_knows.png")
-#     image.show("who_knows.png")
+# step_up(elevation_list[2][5])
 
-# enumerate_the_thing(what_now)
-
-# enumerated_list = [(enumerate(intensity_list))]
-# print(len(enumerated_list) + " length of enumerated list")
-# enumerated_intensities = [enumerate(row) for row in intensity_list]
-# print (enumerated_intensities[0][0])
-
-
-# class Pathfinder:
-
-#     def __init__(self):
+#     # if y is the top row, the options would be move fwd or dwn
+#     if y == 0:
+#         step_forward = ([x+1],[y])
+#         step_down = elevation_list([x+1],[y+1])
+#     # if y is bottom row, the options would be move fwd or up
+#     elif y == (len(elevation_list) -1):
+#         step_forward = ([x+1],[y])
+#         step_up = ([x+1],[y-1])
+#     # if y is not top or bottom row, options are move up, fwd or dwn
+#     else:
+#         step_forward = ([x+1],[y])
+#         step_up = ([x+1],[y-1])  
+#         step_down = ([])    
 #         pass
-
-    # def determine_greedy_path(self):
-
-    # def choose_next_step(self):
-
-# Image.new("RGB", (600, 3000))
-
-# for y, row in enumerate(data):
-#     for x, num in enumerate(row):
-#         img.putpixel((x, y), (20, 120, 220))
-
-# img.save('test.png')
-
-# #find maximum elevation as top, minimum elevation as bottom, scale elevation by something in between
