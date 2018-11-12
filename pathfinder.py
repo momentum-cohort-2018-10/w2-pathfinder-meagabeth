@@ -98,18 +98,19 @@ def next_step_options(row, elevation):
     else:
         step_options['straight'] = (x+1, y)
         step_options['up'] = (x+1, y-1)
-        step_options['down'] = (x+1, y+1)
-        # step_options['down'] = coordinates([x+1][y+1])
-    # elif y == (len(elevation_list) - 1):
-    #     step_options['up'] = coordinates([x+1][y-1])
-    #     step_options['straight'] = coordinates([x+1][y])
-    # else:
-    #     step_options['up'] = (coordinates([x+1][y-1]))
-    #     step_options['straight'] = coordinates([x+1][y])   
-    #     step_options['down'] = coordinates([x+1][y+1])  
-    print(step_options)
+        step_options['down'] = (x+1, y+1) 
+    # print(step_options[1])
+    # print(step_options.get('straight'))
+    
+    for k in step_options.keys():
+        print(k, step_options[k])
+        
 
 next_step_options(2, 1)
+print(elevation_list[1][9])
+
+# def get_elevation_at_index():
+
  
 # def step_up(coordinates):
 #     for y in elevation_list:
