@@ -50,22 +50,21 @@ def elevation_to_color_formula(number):
     return color_intensity
 # create a new list of color intensities by looping over the list of elevations and applying the formula
 intensity_list = [[elevation_to_color_formula(number) for number in row] for row in elevation_list]
-print(len(intensity_list))
+# print(len(intensity_list))
 
-
+map_image = Image.new("RGB", (600, 600))
 def print_something(list):
-    map_image = Image.new("RGB", (600, 600))
     for y, row in enumerate(list):
         for x, value, in enumerate(row):
             map_image.putpixel((x, y), (value, value, value))
     map_image.save("map.png")
     map_image.show("map.png")
-    return map_image.save("map.png")
+    
 
-the_map = print_something(intensity_list)
-print("now just print variable 'the_map'")
-Image.open("map.png")
-Image._show("map.png")
+# print_something(intensity_list)
+print("Do you see this?")
+# Image.open("map.png")
+# Image.show("map.png")
 
 #the next line puts a single blue pixel at index (300,300), saves image and then shows image
 #     map_image.putpixel((300, 300), (0, 0, 200))
@@ -88,122 +87,100 @@ def draw_point(x, y):
     map_image = Image.open('map.png')
     map_image.putpixel((x, y), (0, 255, 0))
     map_image.save('map.png')
-    # map_image.show('map.png')
-    map_image.close()
-
-def where_to_start():
-    y = random.randint(0, 600)
-    x = 0
-    return (x, y)
+    map_image.show('map.png')
+    
+draw_point(0, 250) 
 
 
-def next_steps(list):
-    x = 0
-    y = 300
+    # print(x, y)
+    # map_image.putpixel((x, y), (0, 255, 0))
+    # map_image.save("pathfinder.png")
+    # map_image.show("pathfinder.png")
 
-    while x < 599 and y < 599:
-        start_point = elevation_list[x][y]
-        # print(start_point)
-        # print("test")
-#   current_place = elevation_list[x][y]
+# def where_to_start():
+#     y = random.randint(0, 600)
+#     x = 0
+#     return (x, y)
 
-        up = elevation_list[x+1][y-1]
-        # print("UP: " + str(up))
-        fwd = elevation_list[x+1][y]
-        # print("FWD: " + str(fwd))
-        dwn = elevation_list[x+1][y+1]
-        # print("DWN: " + str(dwn))
+# def next_steps(list):
+#     x = 0
+#     y = 300
+#     while x < 600:
+#         start_point = elevation_list[x][y]
+#         # print(start_point)
+#         # print("test")
+# #   current_place = elevation_list[x][y]
 
-        dif_up = abs(up - start_point)  
-        # print(dif_up)
-        dif_fwd = abs(fwd - start_point)
-        # print(dif_fwd)
-        dif_down = abs(dwn - start_point)
-        # print(dif_down)
+#         up = elevation_list[x+1][y-1]
+#         # print("UP: " + str(up))
+#         fwd = elevation_list[x+1][y]
+#         # print("FWD: " + str(fwd))
+#         dwn = elevation_list[x+1][y+1]
+#         # print("DWN: " + str(dwn))
+
+#         dif_up = abs(up - start_point)  
+#         # print(dif_up)
+#         dif_fwd = abs(fwd - start_point)
+#         # print(dif_fwd)
+#         dif_down = abs(dwn - start_point)
+#         # print(dif_down)
 
 
-        if dif_up < dif_fwd and dif_up < dif_down:
-        # current_place = up
-            x += 1
-            y -= 1
-            draw_point(x, y)
-            continue
+#         if dif_up < dif_fwd and dif_up < dif_down:
+#         # current_place = up
+#             x += 1
+#             y -= 1
+#             draw_point(x, y)
+#             continue
             
-        elif dif_up < dif_fwd and dif_up == dif_down:
-    #   current_place = up
-            x += 1
-            y -= 1
-            draw_point(x, y)
-            continue
+#         elif dif_up < dif_fwd and dif_up == dif_down:
+#     #   current_place = up
+#             x += 1
+#             y -= 1
+#             draw_point(x, y)
+#             continue
 
-        elif dif_up > dif_fwd and dif_fwd < dif_down:
-    #   current_place = fwd
-            x += 1
-            # print(x, y)
-            draw_point(x, y)
-            continue
+#         elif dif_up > dif_fwd and dif_fwd < dif_down:
+#     #   current_place = fwd
+#             x += 1
+#             # print(x, y)
+#             draw_point(x, y)
+#             continue
 
-        elif dif_up > dif_fwd and dif_fwd == dif_down:
-    #   current_place = fwd
-            x += 1
-            # print(x, y)
-            draw_point(x, y)
-            continue
+#         elif dif_up > dif_fwd and dif_fwd == dif_down:
+#     #   current_place = fwd
+#             x += 1
+#             # print(x, y)
+#             draw_point(x, y)
+#             continue
 
-        elif dif_up == dif_fwd and dif_fwd < dif_down:
-    #   current_place = fwd
-            x += 1
-            # print(x, y)
-            draw_point(x, y)
+#         elif dif_up == dif_fwd and dif_fwd < dif_down:
+#     #   current_place = fwd
+#             x += 1
+#             # print(x, y)
+#             draw_point(x, y)
 
-        elif dif_up == dif_fwd and dif_fwd == dif_down:
-    #   current_place = fwd
-            x += 1
-            # print(x, y)   
-            draw_point(x, y)    
-            continue
+#         elif dif_up == dif_fwd and dif_fwd == dif_down:
+#     #   current_place = fwd
+#             x += 1
+#             # print(x, y)   
+#             draw_point(x, y)    
+#             continue
 
-        elif dif_up > dif_down and dif_fwd > dif_down:
-    #   current_place = dwn
-            x += 1
-            y += 1
-            # print(x, y)
-            draw_point(x, y)
-            continue
-    # else:
-    #     return    
+#         elif dif_up > dif_down and dif_fwd > dif_down:
+#     #   current_place = dwn
+#             x += 1
+#             y += 1
+#             # print(x, y)
+#             draw_point(x, y)
+#             continue
+
+
+
+#             continue
+#     else:
+#         return    
 # #     map_image.save("pathfinder.png")
         
-next_steps(elevation_list)
-print("did we get to the end?")
-pathfinder = the_map.save('map.png')
-pathfinder = the_map.show('map.png')
+# next_steps(elevation_list)
 
-
-
-# # # def get_elevation_at_index():
-
- 
-# # # def step_up(coordinates):
-# # #     for y in elevation_list:
-# # #         for x in y:
-# # #             current_step = elevation_list[0][0]
-# # #             step_up = (current_step[x+1][y-1])
-# # #             return step_up
-
-# # # step_up(elevation_list[2][5])
-
-# # #     # if y is the top row, the options would be move fwd or dwn
-# # #     if y == 0:
-# # #         step_forward = ([x+1],[y])
-# # #         step_down = elevation_list([x+1],[y+1])
-# # #     # if y is bottom row, the options would be move fwd or up
-# # #     elif y == (len(elevation_list) -1):
-# # #         step_forward = ([x+1],[y])
-# # #         step_up = ([x+1],[y-1])
-# # #     # if y is not top or bottom row, options are move up, fwd or dwn
-# # #     else:
-# # #         step_forward = ([x+1],[y])
-# # #         step_up = ([x+1],[y-1])  
-# # #         step_down = ([])    
-# # #         pass
